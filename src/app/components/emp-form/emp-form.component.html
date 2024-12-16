@@ -19,7 +19,10 @@
 
                     <input class="form-control border border-start-0"
                     type="text"
-                    placeholder="Employee name">
+                    placeholder="Employee name"
+                    name="name"
+                    ngModel
+                    [(ngModel)]="employeeData.name">
                 </div>
             </div>
 
@@ -30,9 +33,12 @@
                         <fa-icon [icon]="faBriefcase"></fa-icon>
                     </span>
 
-                    <select class="form-select border border-start-0">
+                    <select class="form-select border border-start-0"
+                    name="role"
+                    ngModel
+                    [(ngModel)]="employeeData.role">
                         <option
-                        value=""
+                        [value]="undefined"
                         disabled
                         selected>
                             Select role
@@ -40,7 +46,7 @@
                         
                         <option
                         *ngFor="let role of roles"
-                        [value]="roles">
+                        [value]="role">
                             {{role}}
                         </option>
                     </select>
@@ -56,7 +62,9 @@
 
                     <input class="form-control border border-start-0"
                     type="date"
-                    placeholder="Today">
+                    name="fromDate"
+                    ngModel
+                    [(ngModel)]="employeeData.fromDate">
                 </div>
             </div>
 
@@ -75,7 +83,9 @@
 
                     <input class="form-control border border-start-0"
                     type="date"
-                    placeholder="Today">
+                    name="toDate"
+                    ngModel
+                    [(ngModel)]="employeeData.toDate">
                 </div>
             </div>
         </div>

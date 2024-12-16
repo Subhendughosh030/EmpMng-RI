@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faArrowRight, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 
-import { JobRoles } from 'src/app/Utility/content';
+import { JobRoles } from 'src/app/utility/content';
+import { Employee } from 'src/app/utility/model';
 
 
 
@@ -15,7 +17,11 @@ import { JobRoles } from 'src/app/Utility/content';
   standalone: true,
   templateUrl: './emp-form.component.html',
   styleUrls: ['./emp-form.component.css'],
-  imports: [CommonModule, FontAwesomeModule]
+  imports: [
+    FormsModule,
+    CommonModule,
+    FontAwesomeModule
+  ]
 })
 export class EmpFormComponent {
 
@@ -25,7 +31,7 @@ export class EmpFormComponent {
   faArrowRight = faArrowRight;
 
   mode: 'add' | 'edit' = 'add';
-  employeeData: any;
+  employeeData: Employee = {};
   roles: string[] = JobRoles;
 
   constructor(
