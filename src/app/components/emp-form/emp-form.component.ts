@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
@@ -20,6 +20,7 @@ import { Employee } from 'src/app/utility/model';
   imports: [
     FormsModule,
     CommonModule,
+    RouterModule,
     FontAwesomeModule
   ]
 })
