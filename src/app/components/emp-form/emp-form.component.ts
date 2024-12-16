@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-emp-form',
@@ -8,4 +11,21 @@ import { Component } from '@angular/core';
 })
 export class EmpFormComponent {
 
+  mode: 'add' | 'edit' = 'add';
+  employeeData: any;
+
+  constructor(
+    private readonly route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    const currentRoute = this.route.snapshot.routeConfig?.path;
+
+    if (currentRoute === 'add') {
+      this.mode = 'add';
+    } else if (currentRoute === 'edit') {
+      this.mode = 'edit';
+      this.employeeData = history.state.data;
+    }
+  }
 }

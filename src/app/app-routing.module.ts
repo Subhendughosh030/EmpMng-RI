@@ -13,6 +13,15 @@ const routes: Routes = [
         path: 'add',
         loadComponent: () =>
             import('./components/emp-form/emp-form.component').then(m => m.EmpFormComponent)
+    },
+    {
+        path: 'edit',
+        loadComponent: () =>
+            import('./components/emp-form/emp-form.component').then(m => m.EmpFormComponent)
+    },
+    {
+        path: '**',
+        redirectTo: '/'
     }
 ];
 

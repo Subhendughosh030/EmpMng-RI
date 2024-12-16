@@ -1,1 +1,20 @@
-<p>emp-form works!</p>
+<nav class="navbar navbar-dark bg-primary">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">
+			{{ mode === 'add' ? 'Add' : 'Edit' }}
+            Employee Details
+		</a>
+	</div>
+</nav>
+
+<div class="fixed-bottom text-end py-2 border-top">
+	<a class="btn btn-primary me-3"
+	routerLink="/add">
+		Cancel
+	</a>
+
+	<button class="btn btn-primary me-3"
+	routerLink="/add">
+		Save
+    </button>
+</div>
