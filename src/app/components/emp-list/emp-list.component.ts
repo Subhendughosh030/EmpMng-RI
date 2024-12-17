@@ -16,4 +16,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class EmpListComponent {
   faPlus = faPlus;
+
+  
 }
