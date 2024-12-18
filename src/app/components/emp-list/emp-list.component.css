@@ -1,0 +1,24 @@
+.parent-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.myEmployeeDetails {
+    transition: margin-left 0.5s ease-in-out;
+}
+
+.myDelete {
+    width: 6rem;
+    display: none; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.parent-container:hover .myEmployeeDetails {
+    margin-left: -6rem; /* Shift left to make room for the Delete button */
+}
+
+.parent-container:hover .myDelete {
+    display: flex; /* Make the Delete button visible */
+    opacity: 1; /* Fade-in effect */
+}

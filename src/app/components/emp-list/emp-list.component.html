@@ -1,22 +1,32 @@
-<div class="container-fluid py-2 border"
-*ngIf="employee"
-(click)="router.navigateByUrl('/edit', {state: {data : this.employee}})"
-(keyup)="router.navigateByUrl('/edit', {state: {data : this.employee}})">
-    <div class="fw-bold py-1=">
-        {{employee.name}}
+<div class="d-flex align-items-stretch parent-container"
+*ngIf="employee">
+    <div class="myEmployeeDetails container-fluid py-2 flex-grow-1 position-relative"
+    (click)="router.navigateByUrl('/edit', {state: {data : this.employee}})"
+    (keyup)="router.navigateByUrl('/edit', {state: {data : this.employee}})">
+        <div class="fw-bold py-1">
+            {{employee.name}}
+        </div>
+        
+        <div class="py-1 text-secondary">
+            {{employee.role}}
+        </div>
+        
+        <div class="py-1 text-secondary"
+        *ngIf="employee.fromDate && employee.toDate">
+            {{employee.fromDate | date: 'dd MMM, YYYY'}} - {{employee.toDate | date: 'dd MMM, YYYY'}}
+        </div>
+        
+        <div class="py-1 text-secondary"
+        *ngIf="employee.fromDate && !employee.toDate">
+            From {{employee.fromDate | date: 'dd MMM, YYYY'}}
+        </div>
     </div>
-    
-    <div class="py-1 text-secondary">
-        {{employee.role}}
-    </div>
-    
-    <div class="py-1 text-secondary"
-    *ngIf="employee.fromDate && employee.toDate">
-        {{employee.fromDate | date: 'dd MMM, YYYY'}} - {{employee.toDate | date: 'dd MMM, YYYY'}}
-    </div>
-    
-    <div class="py-1 text-secondary"
-    *ngIf="employee.fromDate && !employee.toDate">
-        From {{employee.fromDate | date: 'dd MMM, YYYY'}}
+
+    <div class="bg-danger myDelete d-flex justify-content-center align-items-center"
+    *ngIf="employee.id">
+        <button class="btn text-white"
+        (click)="service.deleteEmployee(employee.id)">
+            Delete
+        </button>
     </div>
 </div>
