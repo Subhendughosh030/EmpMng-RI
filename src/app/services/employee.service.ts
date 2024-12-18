@@ -13,7 +13,7 @@ const DB_VERSION = 1;
 export class EmployeeService {
   
   private db!: IDBPDatabase;
-  private employeesSignal = signal<Employee[]>([]);
+  private readonly employeesSignal = signal<Employee[]>([]);
 
   constructor() {
     this.initializeDB();

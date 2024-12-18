@@ -7,6 +7,8 @@
 	</div>
 </nav>
 
+{{employeeData|json}}
+
 <div class="container py-2">
     <form>
         <div class="row">
@@ -98,7 +100,8 @@
 		Cancel
 	</a>
 
-	<button class="btn btn-primary me-3">
+	<button class="btn btn-primary me-3"
+    (click)="saveEmp()">
 		Save
     </button>
 </div>
