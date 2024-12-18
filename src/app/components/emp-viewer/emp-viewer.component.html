@@ -1,1 +1,28 @@
-<p>emp-viewer works!</p>
+<nav class="navbar navbar-dark bg-primary">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">
+			Employee List
+		</a>
+	</div>
+</nav>
+
+<div *ngIf="currentEmployees().length || pastEmployees().length">
+	<div>{{currentEmployees() | json}}</div>
+	<div>{{pastEmployees() | json}}</div>
+</div>
+
+
+<div class="image-container"
+*ngIf="currentEmployees().length == 0 && pastEmployees().length == 0">
+	<img id="no-record-found-img"
+	src="https://www.bookmypressrelease.com/images/NoRecordFound.gif"
+	alt="No Record Found">
+</div>
+
+
+<div class="fixed-bottom">
+	<a class="btn btn-primary btn-fixed-buttom-right"
+	routerLink="/add">
+		<fa-icon [icon]="faPlus"></fa-icon>
+	</a>
+</div>

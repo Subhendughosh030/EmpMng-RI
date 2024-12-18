@@ -7,7 +7,7 @@ const routes: Routes = [
     {
         path: '',
         loadComponent: () =>
-            import('./components/emp-list/emp-list.component').then(m => m.EmpListComponent)
+            import('./components/emp-viewer/emp-viewer.component').then(m => m.EmpViewerComponent)
     },
     {
         path: 'add',
