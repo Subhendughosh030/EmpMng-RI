@@ -11,7 +11,10 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import { EmpListComponent } from '../emp-list/emp-list.component';
+
 import { EmployeeService } from 'src/app/services/employee.service';
+
 import { Employee } from 'src/app/utility/model';
 
 
@@ -24,7 +27,9 @@ import { Employee } from 'src/app/utility/model';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    RouterModule
+    RouterModule,
+
+    EmpListComponent
   ]
 })
 export class EmpViewerComponent implements OnInit {

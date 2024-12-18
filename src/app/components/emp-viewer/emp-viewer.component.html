@@ -7,8 +7,39 @@
 </nav>
 
 <div *ngIf="currentEmployees().length || pastEmployees().length">
-	<div>{{currentEmployees() | json}}</div>
-	<div>{{pastEmployees() | json}}</div>
+	<div *ngIf="currentEmployees().length">
+		<div class="navbar navbar-dark"
+		style="background-color: #e9e6e6 !important;">
+			<div class="container-fluid">
+				<a class="navbar-brand text-primary" href="#">
+					Current employees
+				</a>
+			</div>
+		</div>
+
+		<div *ngFor="let employee of currentEmployees()">
+			<app-emp-list
+			[employee]="employee">
+			</app-emp-list>
+		</div>
+	</div>
+
+	<div *ngIf="pastEmployees().length">
+		<div class="navbar navbar-dark navbar-dark"
+		style="background-color: #e9e6e6 !important;">
+			<div class="container-fluid">
+				<a class="navbar-brand text-primary" href="#">
+					Previous employees
+				</a>
+			</div>
+		</div>
+
+		<div *ngFor="let employee of pastEmployees()">
+			<app-emp-list
+			[employee]="employee">
+			</app-emp-list>
+		</div>
+	</div>
 </div>
 
 

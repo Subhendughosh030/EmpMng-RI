@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterModule
+} from '@angular/router';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
@@ -33,9 +37,9 @@ export class EmpFormComponent {
   faBriefcase = faBriefcase;
   faArrowRight = faArrowRight;
 
-  mode: 'add' | 'edit' = 'add';
   employeeData: Employee = {};
   roles: string[] = JobRoles;
+  mode: 'add' | 'edit' = 'add';
 
   constructor(
     private readonly router: Router,
@@ -54,7 +58,7 @@ export class EmpFormComponent {
     }
   }
 
-  async saveEmp() {
+  async saveEmp(): Promise<void> {
     try {
       if(this.mode === 'add')
         await this.service.addEmployee(this.employeeData);
