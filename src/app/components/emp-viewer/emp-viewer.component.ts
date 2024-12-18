@@ -38,9 +38,7 @@ export class EmpViewerComponent implements OnInit {
   pastEmployees: Signal<Employee[]> = signal([]);
   currentEmployees: Signal<Employee[]> = signal([]);
 
-  constructor(
-    public service: EmployeeService
-  ) {}
+  constructor(private readonly service: EmployeeService) {}
 
   ngOnInit(): void {
     this.currentEmployees = computed(() =>

@@ -64,7 +64,7 @@ export class EmpFormComponent {
         await this.service.addEmployee(this.employeeData);
       else
         await this.service.updateEmployee(this.employeeData);
-      this.router.navigate(['/']);
+      this.router.navigateByUrl('/');
     }
     catch(e){
       console.log(e)

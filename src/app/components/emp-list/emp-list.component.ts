@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Employee } from 'src/app/utility/model';
 
@@ -16,4 +17,7 @@ import { Employee } from 'src/app/utility/model';
 })
 export class EmpListComponent {
   @Input() employee!: Employee;
+
+  constructor(public readonly router: Router) {}
+
 }

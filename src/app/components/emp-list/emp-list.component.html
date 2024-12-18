@@ -1,5 +1,7 @@
 <div class="container-fluid py-2 border"
-*ngIf="employee">
+*ngIf="employee"
+(click)="router.navigateByUrl('/edit', {state: {data : this.employee}})"
+(keyup)="router.navigateByUrl('/edit', {state: {data : this.employee}})">
     <div class="fw-bold py-1=">
         {{employee.name}}
     </div>
