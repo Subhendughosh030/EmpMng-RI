@@ -8,7 +8,11 @@ import {
 } from '@angular/router';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCalendar, faUser } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCalendar,
+  faTrashAlt,
+  faUser
+} from '@fortawesome/free-regular-svg-icons';
 import { faArrowRight, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -33,6 +37,7 @@ import { Employee } from 'src/app/utility/model';
 export class EmpFormComponent {
 
   faUser = faUser;
+  faTrashAlt = faTrashAlt;
   faCalendar = faCalendar;
   faBriefcase = faBriefcase;
   faArrowRight = faArrowRight;
@@ -47,7 +52,7 @@ export class EmpFormComponent {
     private readonly service: EmployeeService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const currentRoute = this.route.snapshot.routeConfig?.path;
 
     if (currentRoute === 'add') {
@@ -66,9 +71,19 @@ export class EmpFormComponent {
         await this.service.updateEmployee(this.employeeData);
       this.router.navigateByUrl('/');
     }
-    catch(e){
-      console.log(e)
-      alert(e);
+    catch(err){
+      console.log(err);
+      alert(err);
     }
+  }
+
+  deleteEmp(): void {
+    if(!this.employeeData.id) return;
+    this.service.deleteEmployee(this.employeeData.id).then(() => {
+      this.router.navigateByUrl('/');
+    }, err => {
+      console.log(err);
+      alert(err);
+    });
   }
 }

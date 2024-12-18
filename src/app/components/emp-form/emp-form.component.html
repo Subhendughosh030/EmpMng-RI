@@ -1,9 +1,15 @@
 <nav class="navbar navbar-dark bg-primary">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">
+		<a class="navbar-brand">
 			{{ mode === 'add' ? 'Add' : 'Edit' }}
             Employee Details
 		</a>
+
+		<button class="btn navbar-brand text-end"
+        *ngIf="mode === 'edit'"
+        (click)="deleteEmp()">
+			<fa-icon [icon]="faTrashAlt"></fa-icon>
+        </button>
 	</div>
 </nav>
 

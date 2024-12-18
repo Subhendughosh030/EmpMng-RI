@@ -27,7 +27,7 @@ export class EmployeeService {
         }
       },
     });
-    this.fetchAllEmployees();
+    await this.fetchAllEmployees();
   }
 
   async addEmployee(employee: Employee): Promise<void> {

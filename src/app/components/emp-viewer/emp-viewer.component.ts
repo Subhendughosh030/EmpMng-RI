@@ -52,7 +52,5 @@ export class EmpViewerComponent implements OnInit {
         emp => emp.fromDate && emp.toDate
       )
     );
-    
-    this.service.fetchAllEmployees();
   }
 }
