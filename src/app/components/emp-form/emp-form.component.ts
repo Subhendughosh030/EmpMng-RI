@@ -15,6 +15,8 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faArrowRight, faBriefcase } from '@fortawesome/free-solid-svg-icons';
 
+import { DatePickerComponent } from "../date-picker/date-picker.component";
+
 import { EmployeeService } from 'src/app/services/employee.service';
 
 import { JobRoles } from 'src/app/utility/content';
@@ -31,8 +33,9 @@ import { Employee } from 'src/app/utility/model';
     FormsModule,
     CommonModule,
     RouterModule,
-    FontAwesomeModule
-  ]
+    FontAwesomeModule,
+    DatePickerComponent
+]
 })
 export class EmpFormComponent {
 

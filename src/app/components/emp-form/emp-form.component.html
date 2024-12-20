@@ -58,17 +58,7 @@
             </div>
 
             <div class="col-5">
-                <div class="input-group my-1">
-                    <span class="input-group-text bg-white border border-end-0 text-primary"
-                    id="fromDate">
-                        <fa-icon [icon]="faCalendar"></fa-icon>
-                    </span>
-
-                    <input class="form-control border border-start-0"
-                    type="date"
-                    name="fromDate"
-                    [(ngModel)]="employeeData.fromDate">
-                </div>
+                <app-date-picker></app-date-picker>
             </div>
 
             <div class="col-2 text-primary align-self-center text-center">
@@ -78,25 +68,14 @@
             </div>
 
             <div class="col-5">
-                <div class="input-group my-1">
-                    <span class="input-group-text bg-white border border-end-0 text-primary"
-                    id="toDate">
-                        <fa-icon [icon]="faCalendar"></fa-icon>
-                    </span>
-
-                    <input class="form-control border border-start-0"
-                    type="date"
-                    name="toDate"
-                    [min]="employeeData.fromDate"
-                    [(ngModel)]="employeeData.toDate">
-                </div>
+                <app-date-picker></app-date-picker>
             </div>
         </div>
     </form>
 </div>
 
 <div class="fixed-bottom text-end py-2 border-top">
-	<a class="btn btn-light text-primary me-3"
+	<a class="btn btn-light my-btn-light text-primary me-3"
 	routerLink="/">
 		Cancel
 	</a>

@@ -1,0 +1,94 @@
+<ng-template
+#datePickerModal
+let-modal>
+    <div class="modal-body">
+        <div class="row">
+            <!-- No date-->
+            <div class="col-6">
+                <button class="btn btn-light my-btn-light mb-3"
+                (click)="selectNoDate()">
+                    No date
+                </button>
+            </div>
+
+            <!-- Todate -->
+            <div class="col-6">
+                <button class="btn btn-light my-btn-light mb-3"
+                (click)="selectToday()">
+                    Today
+                </button>
+            </div>
+
+            <!-- Next Monday -->
+            <div class="col-6">
+                <button class="btn btn-light my-btn-light mb-3"
+                (click)="selectNextMonday()">
+                    Next Monday
+                </button>
+            </div>
+
+            <!-- Next Tuesday -->
+            <div class="col-6">
+                <button class="btn btn-light my-btn-light mb-3"
+                (click)="selectNextTuesday()">
+                    Next Tuesday
+                </button>
+            </div>
+
+            <!-- After 1 Week -->
+            <div class="col-6">
+                <button class="btn btn-light my-btn-light mb-3"
+                (click)="selectAfterOneWeek()">
+                    After 1 Week
+                </button>
+            </div>
+        </div>
+
+        <ngb-datepicker
+        [navigation]="'arrows'"
+        [outsideDays]="'hidden'"
+        [firstDayOfWeek]="0"
+        [(ngModel)]="selectedDate"
+        (dateSelect)="updateDisplayDate()">
+        </ngb-datepicker>
+    </div>
+
+    <div class="modal-footer">
+        <div class="footer-left">
+            <span class="text-primary me-2">
+                <fa-icon [icon]="faCalendar"></fa-icon>
+            </span>
+
+            <span>
+                {{ displayDate }}
+            </span>
+        </div>
+
+        <div class="footer-right">
+            <button class="btn btn-light my-btn-light"
+            (click)="modal.dismiss()">
+                Cancel
+            </button>
+            
+            <button class="btn btn-primary"
+            (click)="applyingDate = displayDate; modal.close(selectedDate)">
+                Save
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Trigger -->
+<div class="input-group my-1">
+    <span class="input-group-text bg-white border border-end-0 text-primary"
+    id="fromDate">
+        <fa-icon [icon]="faCalendar"></fa-icon>
+    </span>
+
+    <input class="form-control border border-start-0"
+    type="text"
+    name="fromDate"
+    readonly
+    [value]="applyingDate"
+    (click)="openModal(datePickerModal)">
+</div>
