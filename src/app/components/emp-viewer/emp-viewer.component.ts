@@ -28,7 +28,6 @@ import { Employee } from 'src/app/utility/model';
     CommonModule,
     FontAwesomeModule,
     RouterModule,
-
     EmpListComponent
   ]
 })
@@ -41,15 +40,17 @@ export class EmpViewerComponent implements OnInit {
   constructor(private readonly service: EmployeeService) {}
 
   ngOnInit(): void {
+    let today = new Date();
+
     this.currentEmployees = computed(() =>
       this.service.employees().filter(
-        emp => emp.fromDate && !emp.toDate
+        emp => emp.fromDate && (!emp.toDate || emp.toDate > today)
       )
     );
 
     this.pastEmployees = computed(() =>
       this.service.employees().filter(
-        emp => emp.fromDate && emp.toDate
+        emp => emp.fromDate && emp.toDate && emp.toDate <= today
       )
     );
   }
