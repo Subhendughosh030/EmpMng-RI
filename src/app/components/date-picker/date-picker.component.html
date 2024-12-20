@@ -52,6 +52,7 @@ let-modal>
         [navigation]="'arrows'"
         [outsideDays]="'hidden'"
         [firstDayOfWeek]="0"
+        [minDate]="getMinDate()"
         [(ngModel)]="selectedDate"
         (dateSelect)="updateDisplayDate()">
         </ngb-datepicker>

@@ -35,12 +35,13 @@ import {
 export class DatePickerComponent implements OnInit {
 
   @Input() date?: Date;
+  @Input() minDate?: Date;
   @Input() for: 'fromDate' | 'toDate' = 'fromDate';
   @Output() dateChange = new EventEmitter<Date>();
   
   faCalendar = faCalendar;
 
-  selectedDate!: NgbDateStruct | null;
+  selectedDate?: NgbDateStruct;
   displayDate: string = 'Today';
   applyingDateStr: string = 'Today';
 
@@ -51,14 +52,14 @@ export class DatePickerComponent implements OnInit {
     const currentDay = today.getDay();
     const offset = (dayOfWeek + 7 - currentDay) % 7 || 7;
     today.setDate(today.getDate() + offset);
-    return {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    };
+    const futureDate = this.parseDateToNgbDateStruct(today);
+    if (!futureDate) {
+      throw new Error('Failed to parse future date');
+    }
+    return futureDate;
   }
 
-  private formatDate(date: NgbDateStruct | null): string {
+  private formatDate(date?: NgbDateStruct): string {
     if (!date) return 'No date';
     const currentDate = new Date();
     const selected = new Date(date.year, date.month - 1, date.day);
@@ -76,16 +77,26 @@ export class DatePickerComponent implements OnInit {
     }).format(new Date(date.year, date.month - 1))} ${date.year}`;
   }
 
-  ngOnInit(): void {
-    if (this.date) {
-      this.selectedDate = {
-        year: this.date.getFullYear(),
-        month: this.date.getMonth() + 1,
-        day: this.date.getDate(),
-      }
+  private parseNgbDateStructToDate(dateStruct?: NgbDateStruct): Date | undefined {
+    if (dateStruct)
+      return new Date(dateStruct.year, dateStruct.month - 1, dateStruct.day);
+    return undefined;
+  }
+
+  private parseDateToNgbDateStruct(date?: Date): NgbDateStruct | undefined {
+    if (date) {
+      return {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+      };
     }
-    else
-      this.selectedDate = null;
+    return undefined;
+  }
+
+  ngOnInit(): void {
+    if (this.date)
+      this.selectedDate = this.parseDateToNgbDateStruct(this.date);
     this.updateDisplayDate();
     this.applyingDateStr = this.displayDate;
   }
@@ -94,7 +105,7 @@ export class DatePickerComponent implements OnInit {
     let modalRef = this.modalService.open(content, { size: 'sm', centered: true });
     modalRef.result.then((dateStruct: NgbDateStruct | null) => {
       if (dateStruct)
-        this.dateChange.emit(new Date(dateStruct.year, dateStruct.month - 1, dateStruct.day));
+        this.dateChange.emit(this.parseNgbDateStructToDate(dateStruct));
       else
         this.dateChange.emit();
     }, console.log);
@@ -106,11 +117,7 @@ export class DatePickerComponent implements OnInit {
 
   selectToday(): void {
     const today = new Date();
-    this.selectedDate = {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    };
+    this.selectedDate = this.parseDateToNgbDateStruct(today);
     this.updateDisplayDate();
   }
 
@@ -122,16 +129,18 @@ export class DatePickerComponent implements OnInit {
   selectAfterOneWeek(): void {
     const today = new Date();
     today.setDate(today.getDate() + 7);
-    this.selectedDate = {
-      year: today.getFullYear(),
-      month: today.getMonth() + 1,
-      day: today.getDate(),
-    };
+    this.selectedDate = this.parseDateToNgbDateStruct(today);
     this.updateDisplayDate();
   }
 
   selectNoDate(): void {
-    this.selectedDate = null;
+    this.selectedDate = undefined;
     this.updateDisplayDate();
+  }
+
+  getMinDate(): NgbDateStruct {
+    if (this.minDate)
+      return this.parseDateToNgbDateStruct(this.minDate)!;
+    return { year: 1900, month: 1, day: 1 };
   }
 }

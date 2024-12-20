@@ -70,6 +70,11 @@ export class EmpFormComponent {
 
   async saveEmp(): Promise<void> {
     try {
+      if (
+        this.employeeData.toDate
+        && this.employeeData.fromDate
+        && this.employeeData.toDate < this.employeeData.fromDate
+      ) throw new Error('The end date cannot be before the start date.');
       if(this.mode === 'add')
         await this.service.addEmployee(this.employeeData);
       else

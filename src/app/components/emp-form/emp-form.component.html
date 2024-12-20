@@ -13,8 +13,6 @@
 	</div>
 </nav>
 
-{{employeeData|json}}
-
 <div class="container py-2">
     <form>
         <div class="row">
@@ -76,6 +74,8 @@
             <div class="col-5">
                 <app-date-picker
                 [for]="'toDate'"
+                [date]="employeeData.toDate"
+                [minDate]="employeeData.fromDate"
                 (dateChange)="employeeData.toDate = $event">
                 </app-date-picker>
             </div>
