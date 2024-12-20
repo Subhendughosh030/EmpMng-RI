@@ -45,7 +45,9 @@ export class EmpFormComponent {
   faBriefcase = faBriefcase;
   faArrowRight = faArrowRight;
 
-  employeeData: Employee = {};
+  employeeData: Employee = {
+    fromDate: new Date()
+  };
   roles: string[] = JobRoles;
   mode: 'add' | 'edit' = 'add';
 

@@ -34,13 +34,15 @@ import {
 })
 export class DatePickerComponent implements OnInit {
 
+  @Input() date?: Date;
   @Input() for: 'fromDate' | 'toDate' = 'fromDate';
   @Output() dateChange = new EventEmitter<Date>();
   
   faCalendar = faCalendar;
+
   selectedDate!: NgbDateStruct | null;
   displayDate: string = 'Today';
-  applyingDate: string = 'Today';
+  applyingDateStr: string = 'Today';
 
   constructor(private readonly modalService: NgbModal) { }
   
@@ -60,7 +62,7 @@ export class DatePickerComponent implements OnInit {
     if (!date) return 'No date';
     const currentDate = new Date();
     const selected = new Date(date.year, date.month - 1, date.day);
-
+    
     if (
       currentDate.getDate() === selected.getDate() &&
       currentDate.getMonth() === selected.getMonth() &&
@@ -75,15 +77,17 @@ export class DatePickerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.applyingDate === 'Today') {
-      const today = new Date();
+    if (this.date) {
       this.selectedDate = {
-        year: today.getFullYear(),
-        month: today.getMonth() + 1,
-        day: today.getDate(),
-      };
-      this.dateChange.emit(new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day));
+        year: this.date.getFullYear(),
+        month: this.date.getMonth() + 1,
+        day: this.date.getDate(),
+      }
     }
+    else
+      this.selectedDate = null;
+    this.updateDisplayDate();
+    this.applyingDateStr = this.displayDate;
   }
 
   openModal(content: any): void {

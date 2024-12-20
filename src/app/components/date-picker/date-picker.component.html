@@ -75,7 +75,7 @@ let-modal>
             </button>
             
             <button class="btn btn-primary"
-            (click)="applyingDate = displayDate; modal.close(selectedDate)">
+            (click)="applyingDateStr = displayDate; modal.close(selectedDate)">
                 Save
             </button>
         </div>
@@ -93,6 +93,6 @@ let-modal>
     type="text"
     name="fromDate"
     readonly
-    [value]="applyingDate"
+    [value]="applyingDateStr"
     (click)="openModal(datePickerModal)">
 </div>
