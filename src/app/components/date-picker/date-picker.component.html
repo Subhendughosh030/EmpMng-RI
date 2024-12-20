@@ -48,14 +48,16 @@ let-modal>
             </div>
         </div>
 
-        <ngb-datepicker
-        [navigation]="'arrows'"
-        [outsideDays]="'hidden'"
-        [firstDayOfWeek]="0"
-        [minDate]="getMinDate()"
-        [(ngModel)]="selectedDate"
-        (dateSelect)="updateDisplayDate()">
-        </ngb-datepicker>
+        <div class="d-flex justify-content-center">
+            <ngb-datepicker
+            [navigation]="'arrows'"
+            [outsideDays]="'hidden'"
+            [firstDayOfWeek]="0"
+            [minDate]="getMinDate()"
+            [(ngModel)]="selectedDate"
+            (dateSelect)="updateDisplayDate()">
+            </ngb-datepicker>
+        </div>
     </div>
 
     <div class="modal-footer">

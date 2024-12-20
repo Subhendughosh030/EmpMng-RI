@@ -102,7 +102,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   openModal(content: any): void {
-    let modalRef = this.modalService.open(content, { size: 'sm', centered: true });
+    let modalRef = this.modalService.open(content, { centered: true });
     modalRef.result.then((dateStruct: NgbDateStruct | null) => {
       if (dateStruct)
         this.dateChange.emit(this.parseNgbDateStructToDate(dateStruct));
