@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,7 +25,6 @@ import {
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],
   imports: [
-    
     FormsModule,
     CommonModule,
     NgbModalModule,
@@ -29,9 +34,11 @@ import {
 })
 export class DatePickerComponent implements OnInit {
 
+  @Input() for: 'fromDate' | 'toDate' = 'fromDate';
+  @Output() dateChange = new EventEmitter<Date>();
   
   faCalendar = faCalendar;
-  selectedDate!: NgbDateStruct;
+  selectedDate!: NgbDateStruct | null;
   displayDate: string = 'Today';
   applyingDate: string = 'Today';
 
@@ -50,7 +57,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   private formatDate(date: NgbDateStruct | null): string {
-    if (!date) return 'Today';
+    if (!date) return 'No date';
     const currentDate = new Date();
     const selected = new Date(date.year, date.month - 1, date.day);
 
@@ -75,12 +82,18 @@ export class DatePickerComponent implements OnInit {
         month: today.getMonth() + 1,
         day: today.getDate(),
       };
+      this.dateChange.emit(new Date(this.selectedDate.year, this.selectedDate.month - 1, this.selectedDate.day));
     }
   }
 
   openModal(content: any): void {
     let modalRef = this.modalService.open(content, { size: 'sm', centered: true });
-    modalRef.result.then(console.log, console.log);
+    modalRef.result.then((dateStruct: NgbDateStruct | null) => {
+      if (dateStruct)
+        this.dateChange.emit(new Date(dateStruct.year, dateStruct.month - 1, dateStruct.day));
+      else
+        this.dateChange.emit();
+    }, console.log);
   }
 
   updateDisplayDate(): void {
@@ -97,13 +110,8 @@ export class DatePickerComponent implements OnInit {
     this.updateDisplayDate();
   }
 
-  selectNextMonday(): void {
-    this.selectedDate = this.getFutureDate(1); // 1 -> Monday
-    this.updateDisplayDate();
-  }
-
-  selectNextTuesday(): void {
-    this.selectedDate = this.getFutureDate(2); // 2 -> Tuesday
+  selectNextDay(dayOfWeek: number): void {
+    this.selectedDate = this.getFutureDate(dayOfWeek);
     this.updateDisplayDate();
   }
 
@@ -119,6 +127,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   selectNoDate(): void {
-    console.log('no date selected');
+    this.selectedDate = null;
+    this.updateDisplayDate();
   }
 }

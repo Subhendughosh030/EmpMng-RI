@@ -4,14 +4,15 @@ let-modal>
     <div class="modal-body">
         <div class="row">
             <!-- No date-->
-            <div class="col-6">
+            <div class="col-6"
+            *ngIf="for === 'toDate'">
                 <button class="btn btn-light my-btn-light mb-3"
                 (click)="selectNoDate()">
                     No date
                 </button>
             </div>
 
-            <!-- Todate -->
+            <!-- Today -->
             <div class="col-6">
                 <button class="btn btn-light my-btn-light mb-3"
                 (click)="selectToday()">
@@ -20,23 +21,26 @@ let-modal>
             </div>
 
             <!-- Next Monday -->
-            <div class="col-6">
+            <div class="col-6"
+            *ngIf="for === 'fromDate'">
                 <button class="btn btn-light my-btn-light mb-3"
-                (click)="selectNextMonday()">
+                (click)="selectNextDay(1)">
                     Next Monday
                 </button>
             </div>
 
             <!-- Next Tuesday -->
-            <div class="col-6">
+            <div class="col-6"
+            *ngIf="for === 'fromDate'">
                 <button class="btn btn-light my-btn-light mb-3"
-                (click)="selectNextTuesday()">
+                (click)="selectNextDay(2)">
                     Next Tuesday
                 </button>
             </div>
 
             <!-- After 1 Week -->
-            <div class="col-6">
+            <div class="col-6"
+            *ngIf="for === 'fromDate'">
                 <button class="btn btn-light my-btn-light mb-3"
                 (click)="selectAfterOneWeek()">
                     After 1 Week
